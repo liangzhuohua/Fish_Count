@@ -1,0 +1,10 @@
+# Custom data for safety helmet
+train: F:/源代码和数据集/Finsh/dataset/train/images
+val: F:/源代码和数据集/Finsh/dataset/val/images
+
+# Classes
+nc: 1  # number of classes
+names: ['fish'] # class names
+
+
+

@@ -1,0 +1,37 @@
+# pip install -r requirements.txt
+
+# Base ----------------------------------------
+matplotlib>=3.2.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+numpy>=1.18.5 -i https://pypi.tuna.tsinghua.edu.cn/simple
+opencv-python>=4.1.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+Pillow>=7.1.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+PyYAML>=5.3.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+requests>=2.23.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+scipy>=1.4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+torch>=1.7.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+torchvision>=0.8.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+tqdm>=4.41.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# Logging -------------------------------------
+tensorboard>=2.4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+# wandb
+
+# Plotting ------------------------------------
+pandas>=1.1.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
+seaborn>=0.11.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# Export --------------------------------------
+# coremltools>=4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple  # CoreML export
+# onnx>=1.9.0 -i https://pypi.tuna.tsinghua.edu.cn/simple  # ONNX export
+# onnx-simplifier>=0.3.6 -i https://pypi.tuna.tsinghua.edu.cn/simple  # ONNX simplifier
+# scikit-learn==0.19.2 -i https://pypi.tuna.tsinghua.edu.cn/simple  # CoreML quantization
+# tensorflow>=2.4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple  # TFLite export
+# tensorflowjs>=3.9.0 -i https://pypi.tuna.tsinghua.edu.cn/simple  # TF.js export
+# openvino-dev -i https://pypi.tuna.tsinghua.edu.cn/simple  # OpenVINO export
+
+# Extras --------------------------------------
+# albumentations>=1.0.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
+# Cython -i https://pypi.tuna.tsinghua.edu.cn/simple  # for pycocotools https://github.com/cocodataset/cocoapi/issues/172
+# pycocotools>=2.0 -i https://pypi.tuna.tsinghua.edu.cn/simple  # COCO mAP
+# roboflow -i https://pypi.tuna.tsinghua.edu.cn/simple
+thop -i https://pypi.tuna.tsinghua.edu.cn/simple  # FLOPs computation
