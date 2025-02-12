@@ -1,6 +1,6 @@
 # 基于改进YOLOv5s的鱼苗个体检测与计数研究
 
-## 下载数据集
+## 一、下载数据集
 数据集已经上传到Kaggle，在Kaggle中，搜索Fish_Count。 
 
 ![image](https://github.com/user-attachments/assets/521ed58c-797e-4f29-977d-0d4112f2d71a)
@@ -11,7 +11,7 @@
 
 把下载下来的数据集进行解压，并且重命名为dataset_pro
 
-## 项目目录结构与介绍
+## 二、项目目录结构与介绍
 
 ### dataset_pro 
 数据集目录
@@ -46,7 +46,11 @@
 - 验证文件在 `yolov5/val.py` 中
 
 - 预训练模型在 `yolov5/weight/yolov5s.pt` 中
-## 如何复现
+
+### README.md 
+即为本说明文件。
+
+## 三、如何复现
 
 ### 1.环境搭建
 
@@ -361,7 +365,7 @@ head:
 
 > 若最后训练出来的结果与论文有差异，可以使用val.py来验证我们已经训练好的模型。
 
-## 注意
+## 四、注意
 ### 我们这边训练出来的最终模型为
 
 `yolov5/weight/improve.pt`
