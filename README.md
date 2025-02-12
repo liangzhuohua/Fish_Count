@@ -5,12 +5,17 @@
 
 ![image](https://github.com/user-attachments/assets/521ed58c-797e-4f29-977d-0d4112f2d71a)
 
+点进去后，下载即可 
+
+![image](https://github.com/user-attachments/assets/a5068f98-e5a9-42af-a410-5634579ff8a0)
+
+把下载下来的数据集进行解压，并且重命名为dataset_pro
 
 ## 项目目录结构与介绍
 
 ### dataset_pro 
 数据集目录
-解压dataset_pro.tar.gz即可获得
+从Kaggle上下载解压即可获得。
 
 #### train 
 
