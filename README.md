@@ -13,7 +13,7 @@
 
 ## 二、项目目录结构与介绍
 
-### dataset_pro 
+### 1、dataset_pro 
 数据集目录
 从Kaggle上下载解压即可获得。
 
@@ -25,7 +25,7 @@
 
 验证集目录
 
-### yolov5  yolov5项目  
+### 2、yolov5  yolov5项目  
 
 里面是本研究的yolov5项目的代码
 
@@ -47,7 +47,7 @@
 
 - 预训练模型在 `yolov5/weight/yolov5s.pt` 中
 
-### README.md 
+### 3、README.md 
 即为本说明文件。
 
 ## 三、如何复现
