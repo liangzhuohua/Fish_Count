@@ -1,5 +1,11 @@
 # 基于改进YOLOv5s的鱼苗个体检测与计数研究
 
+## 下载数据集
+数据集已经上传到Kaggle，在Kaggle中，搜索Fish_Count。 
+
+![image](https://github.com/user-attachments/assets/521ed58c-797e-4f29-977d-0d4112f2d71a)
+
+
 ## 项目目录结构与介绍
 
 ### dataset_pro 
