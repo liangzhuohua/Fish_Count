@@ -27,14 +27,6 @@
 > labelImg
 
 
-
-或者下载工具  labelImg.exe
-链接：https://pan.baidu.com/s/14iBlyr3ahhymMukeWjtTEA 
-提取码：c1dx
-
-
-------
-
 ##### 半自动标注
 
 如果数据集较多，可以先手动标注少量，然后训练出初版模型，然后用初版模型预测进行预标注，最后人工检查。
@@ -53,17 +45,6 @@ data_conf = './data/custom_data.yaml'  #数据集配置文件路径
 ```
 
 3.运行auto_label.py 
-
-
-
-------
-
-##### 鱼苗目标检测标注数据集分享衔接：
-
-关注公众号datanlp 然后回复关键词 **fry** 获取
-
-
-
 
 
 ### 三.数据集增强
