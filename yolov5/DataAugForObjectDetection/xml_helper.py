@@ -3,13 +3,18 @@ import xml.etree.ElementTree as ET
 import xml.dom.minidom as DOC
 import os
 
-# 从xml文件中提取bounding box信息, 格式为[[x_min, y_min, x_max, y_max, name]]
+# Extract bounding box information from the xml file in the format of [[x_min, y_min, x_max, y_max, name]].
 def parse_xml(xml_path):
     '''
     输入：
         xml_path: xml的文件路径
     输出：
         从xml文件中提取bounding box信息, 格式为[[x_min, y_min, x_max, y_max, name]]
+    '''
+    '''
+        Input:
+        xml_path: The file path of the XML
+        Output: Extract bounding box information from the xml file in the format of [[x_min, y_min, x_max, y_max, name]].
     '''
     tree = ET.parse(xml_path)		
     root = tree.getroot()
@@ -25,7 +30,7 @@ def parse_xml(xml_path):
         coords.append([x_min, y_min, x_max, y_max, name])
     return coords
 
-#将bounding box信息写入xml文件中, bouding box格式为[[x_min, y_min, x_max, y_max, name]]
+#Write the bounding box information into the xml file. The bounding box format is [[x_min, y_min, x_max, y_max, name]].
 def generate_xml(img_name,image,coords,out_root_path):
     '''
     输入：
@@ -34,7 +39,13 @@ def generate_xml(img_name,image,coords,out_root_path):
         img_size：图像的大小,格式为[h,w,c]
         out_root_path: xml文件输出的根路径
     '''
-
+    '''
+    Input:
+        img_name: Picture name, for example, a.jpg
+        coords: Coordinate list, in the format of [[x_min, y_min, x_max, y_max, name]], where name is the annotation of the overview
+        img_size: Size of the image, in the format of [h, w, c]
+        out_root_path: Root path for outputting xml files 
+    '''
     img_size=image.shape
     doc = DOC.Document()  # 创建DOM文档对象
 
@@ -121,7 +132,7 @@ def generate_xml(img_name,image,coords,out_root_path):
         title.appendChild(title_text)
         bndbox.appendChild(title)
 
-    # 将DOM对象doc写入文件
+    # Write the DOM object doc to a file
     out_xml_path=os.path.join(out_root_path, 'Annotations')
     if not os.path.exists(out_xml_path):
         os.makedirs(out_xml_path)
