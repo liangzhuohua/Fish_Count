@@ -264,18 +264,18 @@ def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, MDPIoU=F
     # 计算 IoU
     iou = inter / union
     if CIoU or DIoU or GIoU:
-        cw = torch.max(b1_x2, b2_x2) - torch.min(b1_x1, b2_x1)  # 凸边界框宽度
-        ch = torch.max(b1_y2, b2_y2) - torch.min(b1_y1, b2_y1)  # 凸边界框高度
-        if CIoU or DIoU:  # 距离 IoU 或完整 IoU https://arxiv.org/abs/1911.08287v1
-            c2 = cw ** 2 + ch ** 2 + eps  # 凸对角线平方
-            rho2 = ((b2_x1 + b2_x2 - b1_x1 - b1_x2) ** 2 + (b2_y1 + b2_y2 - b1_y1 - b1_y2) ** 2) / 4  # 中心距离的平方
+        cw = torch.max(b1_x2, b2_x2) - torch.min(b1_x1, b2_x1)  # Convex bounding box width
+        ch = torch.max(b1_y2, b2_y2) - torch.min(b1_y1, b2_y1)  # Convex bounding box height
+        if CIoU or DIoU:  
+            c2 = cw ** 2 + ch ** 2 + eps  # The square of the convex diagonal
+            rho2 = ((b2_x1 + b2_x2 - b1_x1 - b1_x2) ** 2 + (b2_y1 + b2_y2 - b1_y1 - b1_y2) ** 2) / 4  # The square of the center distance
             if CIoU:  # https://github.com/Zzh-tju/DIoU-SSD-pytorch/blob/master/utils/box/box_utils.py#L47
                 v = (4 / math.pi ** 2) * torch.pow(torch.atan(w2 / (h2 + eps)) - torch.atan(w1 / (h1 + eps)), 2)
                 with torch.no_grad():
                     alpha = v / (v - iou + (1 + eps))
                 return iou - (rho2 / c2 + v * alpha)  # CIoU
             return iou - rho2 / c2  # DIoU
-        c_area = cw * ch + eps  # 凸面积
+        c_area = cw * ch + eps  # Lateral surface area
         return iou - (c_area - union) / c_area  # GIoU https://arxiv.org/pdf/1902.09630.pdf
     elif MDPIoU:
         d1 = (b2_x1 - b1_x1) ** 2 + (b2_y1 - b1_y1) ** 2
