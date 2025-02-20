@@ -15,13 +15,13 @@ class_names=['fish']
 
 
 test_rate = 0.2
-IMAGE_PATH = FILE_ROOT + "images"  # 图片的位置
-ANNOTATIONS_PATH = FILE_ROOT + "Annotations"  # 数据集标签文件的位置
-LABELS_ROOT = FILE_ROOT + "Labels"  # 进行归一化之后的标签位置
+IMAGE_PATH = FILE_ROOT + "images"  # The position of the picture
+ANNOTATIONS_PATH = FILE_ROOT + "Annotations"  # The location of the dataset label file
+LABELS_ROOT = FILE_ROOT + "Labels"  # The position of the label after normalization is carried out.
 os.makedirs(LABELS_ROOT)
 
-DEST_IMAGES_PATH = "split/images"  # 区分训练集、测试集、验证集的图片目标路径
-DEST_LABELS_PATH = "split/labels"  #S 区分训练集、测试集、验证集的标签文件目标路径
+DEST_IMAGES_PATH = "split/images"  # The paths of image targets for the training set, test set and validation set respectively
+DEST_LABELS_PATH = "split/labels"  # The target path of the label file for distinguishing the training set, test set and validation set
 
 
 def cord_converter(size, box):
@@ -31,7 +31,13 @@ def cord_converter(size, box):
     :param box: anchor box 的坐标 [左上角x,左上角y,右下角x,右下角y,]
     :return: 转换后的 [x,y,w,h]
     """
-
+    """
+    Convert the annotated XML file annotations to Darknet format coordinates
+    :param size: Image size: [width, height]
+    :param box: Anchor box coordinates [left-top x, left-top y, right-bottom x, right-bottom y]
+    :return: Converted [x, y, w, h] 
+    """
+    
     x1 = int(box[0])
     y1 = int(box[1])
     x2 = int(box[2])
@@ -81,6 +87,11 @@ def test_dataset_box_feature(file_name, point_array):
     :param point_array: 全部的点 [建议框sx1,sy1,sx2,sy2]
     :return: None
     """
+    """
+    Suggested bounding box for testing dataset using sample data
+    :param image_name: File name of the image
+    :param point_array: All the points [suggested bounding box sx1, sy1, sx2, sy2] :return: None
+    """
     im = Image.open(IMAGE_PATH+'/'+'file_name')
     imDraw = ImageDraw.Draw(im)
     for box in point_array:
@@ -127,7 +138,7 @@ def copy_data(img_set_source, img_labels_root, imgs_source, type):
     file_name = img_set_source + '/' + type + ".txt"
     file = open(file_name)
 
-    # 判断文件夹是否存在，不存在则创建
+ 
     root_image = os.path.join(FILE_ROOT, DEST_IMAGES_PATH+'/' + type)
 
     if not os.path.exists(root_image):
@@ -137,7 +148,7 @@ def copy_data(img_set_source, img_labels_root, imgs_source, type):
     if not os.path.exists(root_labels):
         os.makedirs(root_labels)
 
-    # 遍历文件夹
+  
     for line in file.readlines():
         # print(line)
         img_name = line.strip('\n')
@@ -169,7 +180,7 @@ def save_names(file_name, type='test'):
 
 
 if __name__ == '__main__':
-    # 生成标签
+   
     root = ANNOTATIONS_PATH
     files = os.listdir(root)
     for i in range(10):
@@ -188,7 +199,7 @@ if __name__ == '__main__':
 
         get_xml_data(root, file_name)
 
-    # 将文件进行 train 和 val 的区分
+   
     imgs_root = IMAGE_PATH
     img_labels_root = LABELS_ROOT
     copy_data(FILE_ROOT, img_labels_root, imgs_root, "train")
