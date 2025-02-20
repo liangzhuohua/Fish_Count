@@ -19,7 +19,7 @@ class MainWindow(QWidget):
         self.image_path = ''
         self.camera = cv2.VideoCapture(1)
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model = attempt_load('weight/original.pt', map_location=self.device).fuse().eval()  # 修改模型文件路径
+        self.model = attempt_load('weight/original.pt', map_location=self.device).fuse().eval()  # Modify the file path of the model.
         self.conf_threshold = 0.5
         self.iou_threshold = 0.4
         self.names = self.model.names
@@ -27,17 +27,17 @@ class MainWindow(QWidget):
         self.init_ui()
 
     # def init_ui(self):
-    #     # 创建主布局为水平布局
+    #     # Create the main layout as a horizontal layout.
     #     main_layout = QHBoxLayout()
-    #     # 左侧布局显示导入的视频、图片或者实时摄像头
+    #     # The left layout displays imported videos, pictures, or live cameras
     #     self.label_input = QLabel()
     #     self.label_input.setAlignment(Qt.AlignCenter)
-    #     self.label_input.setFixedSize(400, 300)  # 可以根据需要调整大小
+    #     self.label_input.setFixedSize(400, 300)  # The size can be adjusted as needed.
     #     main_layout.addWidget(self.label_input)
     #
-    #     # 中间布局，放置功能选择按钮
+    #     # Middle layout, place the function selection buttons
     #     middle_layout = QVBoxLayout()
-    #     middle_layout.addStretch(1)  # 添加伸缩项，使按钮居中
+    #     middle_layout.addStretch(1)  # Add an expansion item to center the button.
     #
     #     self.btn_image = QPushButton('图片检测')
     #     self.btn_image.clicked.connect(self.load_image)
@@ -51,52 +51,52 @@ class MainWindow(QWidget):
     #     self.btn_camera.clicked.connect(self.start_camera)
     #     middle_layout.addWidget(self.btn_camera)
     #
-    #     middle_layout.addStretch(1)  # 添加伸缩项，使按钮居中
+    #     middle_layout.addStretch(1)  # Add an expansion item to center the button.
     #     main_layout.addLayout(middle_layout)
     #
-    #     # 右侧布局显示检测结果图像或视频
+    #     # The right layout displays the detection result images or videos.
     #     self.label_output = QLabel()
     #     self.label_output.setAlignment(Qt.AlignCenter)
-    #     self.label_output.setFixedSize(400, 300)  # 可以根据需要调整大小
+    #     self.label_output.setFixedSize(400, 300)  # The size can be adjusted as needed.
     #     main_layout.addWidget(self.label_output)
     #
-    #     # 设置主窗口的布局
+    #     # Set the layout of the main window
     #     self.setLayout(main_layout)
     #     self.setWindowTitle('YOLOv5鱼苗计数')
 
     def init_ui(self):
-        # 使用网格布局
+        # Use grid layout
         grid_layout = QGridLayout()
 
-        # 左侧标签显示输入图像/视频
+        # The label on the left side indicates the input image/video.
         self.label_input = QLabel()
         self.label_input.setAlignment(Qt.AlignCenter)
         self.label_input.setFixedSize(800, 600)
         self.label_input.setStyleSheet("border: 1px solid black;")
-        grid_layout.addWidget(self.label_input, 0, 0, 1, 2)  # 放在第0行，第0列，跨越1行2列
-
-        # 右侧标签显示输出图像/视频
+        grid_layout.addWidget(self.label_input, 0, 0, 1, 2)  # Place it at the 0th row, 0th column, spanning 1 row and 2 columns.
+        
+        # The label on the right side indicates the output image/video.
         self.label_output = QLabel()
         self.label_output.setAlignment(Qt.AlignCenter)
         self.label_output.setFixedSize(800, 600)
         self.label_output.setStyleSheet("border: 1px solid black;")
-        grid_layout.addWidget(self.label_output, 0, 2, 1, 2)  # 放在第0行，第2列，跨越1行2列
+        grid_layout.addWidget(self.label_output, 0, 2, 1, 2)  # Be placed on the 0th row, the 2nd column, spanning 2 rows and 1 column.
 
-        # 功能选择按钮
+        # Function selection button
         self.btn_image = QPushButton('图片检测')
-        self.btn_image.setIcon(QIcon('icon/打开.png'))  # 添加按钮图标
+        self.btn_image.setIcon(QIcon('icon/打开.png'))  # Add button icon
         self.btn_image.setFont(QFont('Arial', 10))
         self.btn_image.clicked.connect(self.load_image)
         grid_layout.addWidget(self.btn_image, 1, 0)
 
         self.btn_video = QPushButton('视频检测')
-        self.btn_video.setIcon(QIcon('icon/视频.png'))  # 添加按钮图标
+        self.btn_video.setIcon(QIcon('icon/视频.png'))  # Add button icon
         self.btn_video.setFont(QFont('Arial', 10))
         self.btn_video.clicked.connect(self.load_video)
         grid_layout.addWidget(self.btn_video, 1, 1)
 
         self.btn_camera = QPushButton('摄像头实时监测')
-        self.btn_camera.setIcon(QIcon('icon/摄像头开.png'))  # 添加按钮图标
+        self.btn_camera.setIcon(QIcon('icon/摄像头开.png'))  # Add button icon
         self.btn_camera.setFont(QFont('Arial', 10))
         self.btn_camera.clicked.connect(self.start_camera)
         grid_layout.addWidget(self.btn_camera, 1, 2)
@@ -125,21 +125,21 @@ class MainWindow(QWidget):
     def load_image(self):
         self.image_path, _ = QFileDialog.getOpenFileName(self, '选择图片文件', '', 'Image files (*.jpg *.png)')
         if self.image_path:
-            print(f"Loaded image path: {self.image_path}")  # 确认路径正确
+            print(f"Loaded image path: {self.image_path}")  # Confirm that the path is correct.
             frame = cv2.imread(self.image_path)
             if frame is not None:
-                print("Image loaded successfully")  # 确认图像加载成功
-                self.display_frame(frame, is_input=True)  # 显示原始图像进行测试
+                print("Image loaded successfully")  # Confirm that the image has been loaded successfully.
+                self.display_frame(frame, is_input=True)  # Display the original image for testing
                 self.detect_image()
             else:
-                print("Failed to load image")  # 如果加载失败，打印错误消息
+                print("Failed to load image")  # If the loading fails, print out the error message.
 
     def start_camera(self):
         self.timer = QTimer()
         self.timer.timeout.connect(self.detect_camera)
         self.timer.start(30)
-        self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 800)  # 设置摄像头窗口宽度
-        self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)  # 设置摄像头窗口高度
+        self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 800)  # Set the width of the camera window
+        self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)  # Set the height of the camera window
 
     def detect_video(self):
         cap = cv2.VideoCapture(self.video_path)
@@ -194,7 +194,7 @@ class MainWindow(QWidget):
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             h, w, ch = frame.shape
             bytes_per_line = ch * w
-            q_img = QImage(frame.data, w, h, bytes_per_line, QImage.Format_RGB888).copy()  # 使用.copy()确保数据的持久性
+            q_img = QImage(frame.data, w, h, bytes_per_line, QImage.Format_RGB888).copy()  # Use `.copy()` to ensure the persistence of data.
             pixmap = QPixmap.fromImage(q_img)
             if is_input:
                 self.label_input.setPixmap(
@@ -222,12 +222,12 @@ class MainWindow(QWidget):
     def process_frame(self):
         ret, frame = self.cap.read()
         if ret:
-            # 对帧进行处理，例如调用 detect 方法
-            # self.detect(frame)  # 假设你有一个处理帧并返回结果的方法
-            # 显示原始帧或处理后的帧
-            self.display_frame(frame, is_input=False)  # 假设你想在右侧显示处理后的结果
+            # 对Process the frames, for example, by invoking the detect method.
+            # self.detect(frame)  # Suppose you have a method that processes frames and returns results.
+            # Display the original frame or the processed frame
+            self.display_frame(frame, is_input=False)  # Suppose you want to display the processed results on the right side.
         else:
-            self.timer.stop()  # 如果没有帧可读，则停止定时器
+            self.timer.stop()  # If there is no frame available for reading, then stop the timer.
 
 
 if __name__ == '__main__':
