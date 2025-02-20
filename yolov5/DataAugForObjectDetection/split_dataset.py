@@ -75,7 +75,7 @@ def split_data(file_path,xml_path, new_file_path, train_rate, val_rate, test_rat
 
 
 if __name__ == '__main__':
-    file_path = r"F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\images"              # 图片
-    xml_path = r'F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\Annotations'            # 标签
-    new_file_path = r"F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\dataset"          # 分配完后的目录
+    file_path = r"F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\images"              # picture
+    xml_path = r'F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\Annotations'            # label
+    new_file_path = r"F:\源代码和数据集\Fish_C\yolov5\DataAugForObjectDetection\data\dataset"          # The distribution list after allocation
     split_data(file_path,xml_path, new_file_path, train_rate=0.8, val_rate=0.2, test_rate=0)
