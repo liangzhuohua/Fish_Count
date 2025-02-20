@@ -1,5 +1,14 @@
 # Fish fry individual detection and counting based on improved YOLOv5s.
 
+## Download the dataset
+The dataset has been uploaded to Kaggle. On Kaggle, search for "Fish_Count".
+
+![image](https://github.com/user-attachments/assets/521ed58c-797e-4f29-977d-0d4112f2d71a)
+
+After clicking on it, just download it.
+
+Unzip the downloaded dataset and rename it as "dataset_pro".
+
 ## Project Directory Structure and Introduction
 
 ### dataset_pro 
