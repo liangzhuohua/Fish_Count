@@ -7,14 +7,21 @@ import random
 from shutil import copyfile
 from PIL import Image
 
-# 只要改下面的CLASSES和PATH就可以了，其他的不用改，这个脚本会自动划分数据集，生成YOLO格式的标签文件【淘宝店铺： 深度学习YOLO数据集】
-# 店铺地址：https://d94jo8owngi1qee4sewlr0fjnbvmy1x.taobao.com/?spm=a1z10.1-c-s.0.0.22a4b130DE2kTn
+
+
 
 # 分类名称  这里改成数据集的分类名称，一定要改！！！请查看数据集目录下的txt文件
 CLASSES = ["fish"]
 # 数据集目录 这里改成数据集的根目录，根目录下有两个文件夹Annotations和JPEGImages，一定要改！！！
 PATH = r"F:\源代码和数据集\Finsh\dataset"
 # 训练集占比80% 训练集:验证集=8:2 这里划分数据集 不用改
+
+'''
+# Classification Name  Here, it should be changed to the classification name of the dataset. This must be done!!! Please refer to the txt file under the dataset directory. CLASSES = ["fish"]
+# Dataset directory. Here, it should be changed to the root directory of the dataset. There are two folders named "Annotations" and "JPEGImages" under the root directory. This must be changed!!!
+PATH = r"F:\Source Code and Dataset\Finsh\dataset"
+# The training set accounts for 80%. The ratio of training set to validation set is 8:2. This part of the code for dataset division does not need to be modified.
+'''
 TRAIN_RATIO = 80
 
 
