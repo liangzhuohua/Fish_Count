@@ -1,6 +1,6 @@
 # 基于改进YOLOv5s的鱼苗个体检测与计数研究
 
-中文 | [English](./README_en.md)
+English | [中文](./README_ZH.md)
 
 ## 一、下载数据集
 数据集已经上传到Kaggle，在Kaggle中，搜索Fish_Count。 
