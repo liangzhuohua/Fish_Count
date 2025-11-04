@@ -133,7 +133,7 @@ train_file = open(os.path.join(wd, "yolov5_train.txt"), 'a', encoding='utf-8')
 test_file = open(os.path.join(wd, "yolov5_valid.txt"), 'a', encoding='utf-8')
 list_imgs = os.listdir(image_dir)  # list image files
 prob = random.randint(1, 100)
-print("数据集: %d个" % len(list_imgs))
+print("DataSet: %d" % len(list_imgs))
 for i in range(0, len(list_imgs)):
     path = os.path.join(image_dir, list_imgs[i])
     if os.path.isfile(path):
