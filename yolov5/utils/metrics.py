@@ -240,10 +240,10 @@ class ConfusionMatrix:
 #     return iou  # IoU
 
 def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, MDPIoU=False, hw=None, eps=1e-7):
-    # 返回框 box1(1,4) 和框 box2(n,4) 的交并比（IoU）
+    
 
-    # 获取边界框的坐标
-    if xywh:  # 从 xywh 转换为 xyxy
+   
+    if xywh:  #  xywh to xyxy
         (x1, y1, w1, h1), (x2, y2, w2, h2) = box1.chunk(4, 1), box2.chunk(4, 1)
         w1_, h1_, w2_, h2_ = w1 / 2, h1 / 2, w2 / 2, h2 / 2
         b1_x1, b1_x2, b1_y1, b1_y2 = x1 - w1_, x1 + w1_, y1 - h1_, y1 + h1_
@@ -254,14 +254,14 @@ def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, MDPIoU=F
         w1, h1 = b1_x2 - b1_x1, b1_y2 - b1_y1
         w2, h2 = b2_x2 - b2_x1, b2_y2 - b2_y1
 
-    # 计算交集面积
+    
     inter = (torch.min(b1_x2, b2_x2) - torch.max(b1_x1, b2_x1)).clamp(0) * \
             (torch.min(b1_y2, b2_y2) - torch.max(b1_y1, b2_y1)).clamp(0)
 
-    # 计算并集面积
+   
     union = w1 * h1 + w2 * h2 - inter + eps
 
-    # 计算 IoU
+   
     iou = inter / union
     if CIoU or DIoU or GIoU:
         cw = torch.max(b1_x2, b2_x2) - torch.min(b1_x1, b2_x1)  # Convex bounding box width

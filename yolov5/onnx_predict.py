@@ -93,8 +93,7 @@ class yolov5():
                 self.grid[i] = self._make_grid(nx, ny)
 
             y = 1 / (1 + np.exp(-outs[i]))  ### sigmoid
-            ###其实只需要对x,y,w,h做sigmoid变换的， 不过全做sigmoid变换对结果影响不大，因为sigmoid是单调递增函数，那么就不影响类别置信度的排序关系，因此不影响后面的NMS
-            ###不过设断点查看类别置信度，都是负数，看来有必要做sigmoid变换把概率值强行拉回到0到1的区间内
+
             y[..., 0:2] = (y[..., 0:2] * 2. - 0.5 + self.grid[i]) * int(self.stride[i])
             y[..., 2:4] = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # wh
             z.append(y.reshape(bs, -1, self.no))

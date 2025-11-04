@@ -4,7 +4,7 @@
 # @Email   : peterhuang0323@outlook.com
 # @File    : data_cfg.py
 # @Software: PyCharm
-# @Brief   : 根据标签文件求先验框
+
 
 import os
 import numpy as np
@@ -15,7 +15,7 @@ FILE_ROOT = "../datasets/"
 CLASS_NAMES = ['fish']
 
 
-ANNOTATION_ROOT = "Annotations"  # 数据集标签文件夹路径
+ANNOTATION_ROOT = "Annotations"  
 #ANNOTATION_PATH = FILE_ROOT + ANNOTATION_ROOT
 ANNOTATION_PATH = "../datasets/Annotations"
 ANCHORS_TXT_PATH = "./anchors.txt"

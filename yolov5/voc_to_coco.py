@@ -25,12 +25,7 @@ DEST_LABELS_PATH = "split/labels"  # The target path of the label file for disti
 
 
 def cord_converter(size, box):
-    """
-    将标注的 xml 文件标注转换为 darknet 形的坐标
-    :param size: 图片的尺寸： [w,h]
-    :param box: anchor box 的坐标 [左上角x,左上角y,右下角x,右下角y,]
-    :return: 转换后的 [x,y,w,h]
-    """
+
     """
     Convert the annotated XML file annotations to Darknet format coordinates
     :param size: Image size: [width, height]
@@ -81,12 +76,7 @@ def save_file(img_jpg_file_name, size, img_box):
 
 
 def test_dataset_box_feature(file_name, point_array):
-    """
-    使用样本数据测试数据集的建议框
-    :param image_name: 图片文件名
-    :param point_array: 全部的点 [建议框sx1,sy1,sx2,sy2]
-    :return: None
-    """
+
     """
     Suggested bounding box for testing dataset using sample data
     :param image_name: File name of the image
@@ -160,12 +150,12 @@ def copy_data(img_set_source, img_labels_root, imgs_source, type):
         # im = Image.open(rf"{img_sor_file}")
         # im.show()
 
-        # 复制图片
+      
         DICT_DIR = FILE_ROOT + DEST_IMAGES_PATH + '/' + type
         img_dict_file = DICT_DIR + '/' + img_name + '.jpg'
         copyfile(img_sor_file, img_dict_file)
 
-        # 复制 label
+       
         DICT_DIR = FILE_ROOT + DEST_LABELS_PATH + '/' + type
         img_dict_file = DICT_DIR + '/' + img_name + '.txt'
         copyfile(label_sor_file, img_dict_file)

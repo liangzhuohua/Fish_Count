@@ -86,7 +86,7 @@ def predict(
                 c = int(cls)  # integer class
                 label =ini_model.names[c]
                 xyxy=[str(int(x)) for x in xyxy]
-                #print('坐标，类别，置信度：',xyxy,label,conf)
+                
                 xyxy.append(label)
                 res.append(xyxy)
     return res
@@ -94,10 +94,10 @@ def predict(
 if __name__ == "__main__":
 
 
-    device='cpu' #如果是使用GPU，则填入int型的0,1,2,3
-    path = './test/img/395edfd78b51bfcc2bfde6386a860589.jpeg' #图片路径
-    weight_path='./weight/fry_best.pt' #模型文件路径
-    data_conf='./data/custom_data.yaml' #数据集配置文件路径
+    device='cpu' 
+    path = './test/img/395edfd78b51bfcc2bfde6386a860589.jpeg' 
+    weight_path='./weight/fry_best.pt' 
+    data_conf='./data/custom_data.yaml' 
 
     img0 = cv2.imread(path)
     model,ini_model=load_model(device=device,weights=weight_path, data_conf=data_conf)

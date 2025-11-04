@@ -60,7 +60,7 @@ class DataAugmentForObjectDetection():
         self.cut_out_holes = cut_out_holes
         self.cut_out_threshold = cut_out_threshold
     
-    # 加噪声
+   
     def _addNoise(self, img):
 
         # random.seed(int(time.time())) 
@@ -290,7 +290,7 @@ class DataAugmentForObjectDetection():
         else:
             horizon = False
         h,w,_ = img.shape
-        if horizon: #水平翻转
+        if horizon: 
             flip_img =  cv2.flip(flip_img, 1)  
         else:
             flip_img = cv2.flip(flip_img, 0)
@@ -315,7 +315,7 @@ class DataAugmentForObjectDetection():
         print('------')
         while change_num < 1:   
             if random.random() < self.crop_rate:       
-                #print('裁剪')
+            
                 change_num += 1
                 img, bboxes = self._crop_img_bboxes(img, bboxes)
 
@@ -330,17 +330,17 @@ class DataAugmentForObjectDetection():
             '''
 
             if random.random() < self.shift_rate:       
-                #print('平移')
+            
                 change_num += 1
                 img, bboxes = self._shift_pic_bboxes(img, bboxes)
             
             if random.random() > self.change_light_rate:
-                #print('亮度')
+               
                 change_num += 1
                 img = self._changeLight(img)
             
             if random.random() < self.add_noise_rate:    
-                #print('加噪声')
+              
                 change_num += 1
                 img = self._addNoise(img)
 
@@ -349,13 +349,6 @@ class DataAugmentForObjectDetection():
                 change_num += 1
                 img = self._cutout(img, bboxes, length=self.cut_out_length, n_holes=self.cut_out_holes, threshold=self.cut_out_threshold)
 
-            # if random.random() < self.flip_rate:    
-            #     print('翻转')
-            #     change_num += 1
-            #     img, bboxes = self._filp_pic_bboxes(img, bboxes)
-
-            #print('\n')
-        # print('------')
         return img, bboxes
 
 
@@ -416,6 +409,6 @@ if __name__ == '__main__':
     p.join()
 
     e = time.time()
-    print('耗时：',e-s)
+    print('time：',e-s)
 
 

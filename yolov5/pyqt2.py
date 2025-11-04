@@ -26,43 +26,6 @@ class MainWindow(QWidget):
         self.colors = [[0, 255, 0] for _ in range(len(self.names))]
         self.init_ui()
 
-    # def init_ui(self):
-    #     # Create the main layout as a horizontal layout.
-    #     main_layout = QHBoxLayout()
-    #     # The left layout displays imported videos, pictures, or live cameras
-    #     self.label_input = QLabel()
-    #     self.label_input.setAlignment(Qt.AlignCenter)
-    #     self.label_input.setFixedSize(400, 300)  # The size can be adjusted as needed.
-    #     main_layout.addWidget(self.label_input)
-    #
-    #     # Middle layout, place the function selection buttons
-    #     middle_layout = QVBoxLayout()
-    #     middle_layout.addStretch(1)  # Add an expansion item to center the button.
-    #
-    #     self.btn_image = QPushButton('图片检测')
-    #     self.btn_image.clicked.connect(self.load_image)
-    #     middle_layout.addWidget(self.btn_image)
-    #
-    #     self.btn_video = QPushButton('视频检测')
-    #     self.btn_video.clicked.connect(self.load_video)
-    #     middle_layout.addWidget(self.btn_video)
-    #
-    #     self.btn_camera = QPushButton('摄像头实时监测')
-    #     self.btn_camera.clicked.connect(self.start_camera)
-    #     middle_layout.addWidget(self.btn_camera)
-    #
-    #     middle_layout.addStretch(1)  # Add an expansion item to center the button.
-    #     main_layout.addLayout(middle_layout)
-    #
-    #     # The right layout displays the detection result images or videos.
-    #     self.label_output = QLabel()
-    #     self.label_output.setAlignment(Qt.AlignCenter)
-    #     self.label_output.setFixedSize(400, 300)  # The size can be adjusted as needed.
-    #     main_layout.addWidget(self.label_output)
-    #
-    #     # Set the layout of the main window
-    #     self.setLayout(main_layout)
-    #     self.setWindowTitle('YOLOv5鱼苗计数')
 
     def init_ui(self):
         # Use grid layout
@@ -83,47 +46,35 @@ class MainWindow(QWidget):
         grid_layout.addWidget(self.label_output, 0, 2, 1, 2)  # Be placed on the 0th row, the 2nd column, spanning 2 rows and 1 column.
 
         # Function selection button
-        self.btn_image = QPushButton('图片检测')
-        self.btn_image.setIcon(QIcon('icon/打开.png'))  # Add button icon
+        self.btn_image = QPushButton('Image detection')
+        self.btn_image.setIcon(QIcon('icon/open.png'))  # Add button icon
         self.btn_image.setFont(QFont('Arial', 10))
         self.btn_image.clicked.connect(self.load_image)
         grid_layout.addWidget(self.btn_image, 1, 0)
 
-        self.btn_video = QPushButton('视频检测')
-        self.btn_video.setIcon(QIcon('icon/视频.png'))  # Add button icon
+        self.btn_video = QPushButton('video detection')
+        self.btn_video.setIcon(QIcon('icon/video.png'))  # Add button icon
         self.btn_video.setFont(QFont('Arial', 10))
         self.btn_video.clicked.connect(self.load_video)
         grid_layout.addWidget(self.btn_video, 1, 1)
 
-        self.btn_camera = QPushButton('摄像头实时监测')
-        self.btn_camera.setIcon(QIcon('icon/摄像头开.png'))  # Add button icon
+        self.btn_camera = QPushButton('Real-time monitoring by cameras')
+        self.btn_camera.setIcon(QIcon('icon/TurnOn.png'))  # Add button icon
         self.btn_camera.setFont(QFont('Arial', 10))
         self.btn_camera.clicked.connect(self.start_camera)
         grid_layout.addWidget(self.btn_camera, 1, 2)
 
-        # self.setStyleSheet("""
-        #             QWidget {
-        #                 background-image: url('icon/图片1.png');
-        #                 background-repeat: no-repeat;
-        #                 background-position: center;
-        #             }
-        #             QPushButton {
-        #                 margin: 10px;
-        #                 padding: 5px 10px;
-        #                 background-color: rgba(255, 255, 255, 150);
-        #             }
-        #         """)
-        # 设置主窗口布局
+
         self.setLayout(grid_layout)
-        self.setWindowTitle('YOLOv5鱼苗计数')
+        self.setWindowTitle('YOLOv5 Fish Counting')
         self.setStyleSheet("QPushButton { margin: 10px; padding: 5px 10px; }")
 
     def load_video(self):
-        self.video_path, _ = QFileDialog.getOpenFileName(self, '选择视频文件', '', 'Video files (*.mp4 *.avi)')
+        self.video_path, _ = QFileDialog.getOpenFileName(self, 'Select video file', '', 'Video files (*.mp4 *.avi)')
         self.detect_video()
 
     def load_image(self):
-        self.image_path, _ = QFileDialog.getOpenFileName(self, '选择图片文件', '', 'Image files (*.jpg *.png)')
+        self.image_path, _ = QFileDialog.getOpenFileName(self, 'Select image file', '', 'Image files (*.jpg *.png)')
         if self.image_path:
             print(f"Loaded image path: {self.image_path}")  # Confirm that the path is correct.
             frame = cv2.imread(self.image_path)
@@ -205,7 +156,7 @@ class MainWindow(QWidget):
                     pixmap.scaled(self.label_output.width(), self.label_output.height(), Qt.KeepAspectRatio,
                                   Qt.SmoothTransformation))
         except Exception as e:
-            print(f"在更新图像显示时发生错误: {e}")
+            print(f"An error occurred while updating the image display: {e}")
 
     def reset_buttons(self):
         self.btn_image.setEnabled(True)
@@ -222,7 +173,7 @@ class MainWindow(QWidget):
     def process_frame(self):
         ret, frame = self.cap.read()
         if ret:
-            # 对Process the frames, for example, by invoking the detect method.
+            # Process the frames, for example, by invoking the detect method.
             # self.detect(frame)  # Suppose you have a method that processes frames and returns results.
             # Display the original frame or the processed frame
             self.display_frame(frame, is_input=False)  # Suppose you want to display the processed results on the right side.

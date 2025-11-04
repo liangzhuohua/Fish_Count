@@ -453,7 +453,7 @@ def parse_opt(known=False):
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='./weight/yolov5s.pt', help='initial weights path')
     parser.add_argument('--cfg', type=str, default='./models/yolov5s.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default='F:/源代码和数据集/Finsh/yolov5/data/custom_data.yaml', help='dataset.yaml path')
+    parser.add_argument('--data', type=str, default='F:/DataSet/Finsh/yolov5/data/custom_data.yaml', help='dataset.yaml path')
     parser.add_argument('--device', default='0', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--workers', type=int, default=8, help='max dataloader workers (per RANK in DDP mode)')
     parser.add_argument('--batch-size', type=int, default=-1, help='total batch size for all GPUs, -1 for autobatch')

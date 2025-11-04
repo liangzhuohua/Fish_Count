@@ -5,12 +5,7 @@ import os
 
 # Extract bounding box information from the xml file in the format of [[x_min, y_min, x_max, y_max, name]].
 def parse_xml(xml_path):
-    '''
-    输入：
-        xml_path: xml的文件路径
-    输出：
-        从xml文件中提取bounding box信息, 格式为[[x_min, y_min, x_max, y_max, name]]
-    '''
+
     '''
         Input:
         xml_path: The file path of the XML
@@ -32,13 +27,7 @@ def parse_xml(xml_path):
 
 #Write the bounding box information into the xml file. The bounding box format is [[x_min, y_min, x_max, y_max, name]].
 def generate_xml(img_name,image,coords,out_root_path):
-    '''
-    输入：
-        img_name：图片名称，如a.jpg
-        coords:坐标list，格式为[[x_min, y_min, x_max, y_max, name]]，name为概况的标注
-        img_size：图像的大小,格式为[h,w,c]
-        out_root_path: xml文件输出的根路径
-    '''
+
     '''
     Input:
         img_name: Picture name, for example, a.jpg
@@ -47,7 +36,7 @@ def generate_xml(img_name,image,coords,out_root_path):
         out_root_path: Root path for outputting xml files 
     '''
     img_size=image.shape
-    doc = DOC.Document()  # 创建DOM文档对象
+    doc = DOC.Document()  
 
     annotation = doc.createElement('annotation')
     doc.appendChild(annotation)

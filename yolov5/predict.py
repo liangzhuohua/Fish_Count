@@ -253,7 +253,7 @@ def main(opt):
     s=time.time()
     run(**vars(opt))
     e=time.time()
-    print('耗时：',e-s)
+    print('time：',e-s)
 
 
 if __name__ == "__main__":

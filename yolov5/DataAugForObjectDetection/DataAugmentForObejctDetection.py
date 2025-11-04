@@ -28,12 +28,7 @@ import time
 
 
 def show_pic(img, bboxes=None):
-    '''
-    输入:
-        img:图像array
-        bboxes:图像的所有boudning box list, 格式为[[x_min, y_min, x_max, y_max]....]
-        names:每个box对应的名称
-    '''
+
     '''
     Input:
         img: Image array
@@ -78,12 +73,7 @@ class DataAugmentForObjectDetection():
     
     # Add noise
     def _addNoise(self, img):
-        '''
-        输入:
-            img:图像array
-        输出:
-            加噪声后的图像array,由于输出的像素是在[0,1]之间,所以得乘以255
-        '''
+
         '''
         Input:
             img: Image array
@@ -104,7 +94,7 @@ class DataAugmentForObjectDetection():
         return random_noise(img, mode=mode, clip=True)*255
 
     
-    # 调整亮度
+
     # Adjust brightness
     def _changeLight(self, img):
         # random.seed(int(time.time()))
@@ -189,19 +179,9 @@ class DataAugmentForObjectDetection():
 
         return img
 
-    # 旋转
+   
     def _rotate_img_bbox(self, img, bboxes, angle=5, scale=1.):
-        '''
-        参考:https://blog.csdn.net/u014540717/article/details/53301195crop_rate
-        输入:
-            img:图像array,(h,w,c)
-            bboxes:该图像包含的所有boundingboxs,一个list,每个元素为[x_min, y_min, x_max, y_max],要确保是数值
-            angle:旋转角度
-            scale:默认1
-        输出:
-            rot_img:旋转后的图像array
-            rot_bboxes:旋转后的boundingbox坐标list
-        '''
+
         '''
         Reference: https://blog.csdn.net/u014540717/article/details/53301195crop_rate
         Input:
@@ -230,12 +210,9 @@ class DataAugmentForObjectDetection():
         # part of the transform
         rot_mat[0,2] += rot_move[0]
         rot_mat[1,2] += rot_move[1]
-        # 仿射变换
+        
         rot_img = cv2.warpAffine(img, rot_mat, (int(math.ceil(nw)), int(math.ceil(nh))), flags=cv2.INTER_LANCZOS4)
 
-        #---------------------- 矫正bbox坐标 ----------------------
-        # rot_mat是最终的旋转矩阵
-        # 获取原始bbox的四个中点，然后将这四个点转换到旋转后的坐标系下
         #---------------------- Correcting the bbox coordinates ----------------------
         # rot_mat is the final rotation matrix
         # Obtain the four midpoints of the original bbox, and then transform these four points to the coordinate system after rotation.
@@ -259,22 +236,14 @@ class DataAugmentForObjectDetection():
             ry_min = ry
             rx_max = rx+rw
             ry_max = ry+rh
-            # 加入list中
+           
             rot_bboxes.append([rx_min, ry_min, rx_max, ry_max,bbox[4]])
         
         return rot_img, rot_bboxes
 
     # Crop
     def _crop_img_bboxes(self, img, bboxes):
-        '''
-        裁剪后的图片要包含所有的框
-        输入:
-            img:图像array
-            bboxes:该图像包含的所有boundingboxs,一个list,每个元素为[x_min, y_min, x_max, y_max],要确保是数值
-        输出:
-            crop_img:裁剪后的图像array
-            crop_bboxes:裁剪后的bounding box的坐标list
-        '''
+
         '''
         The cropped image should contain all the bounding boxes.
         Input:
@@ -332,16 +301,7 @@ class DataAugmentForObjectDetection():
   
     # Translation:
     def _shift_pic_bboxes(self, img, bboxes):
-        '''
-        参考:https://blog.csdn.net/sty945/article/details/79387054
-        平移后的图片要包含所有的框
-        输入:
-            img:图像array
-            bboxes:该图像包含的所有boundingboxs,一个list,每个元素为[x_min, y_min, x_max, y_max],要确保是数值
-        输出:
-            shift_img:平移后的图像array
-            shift_bboxes:平移后的bounding box的坐标list
-        '''
+
         '''
         After translation, the image should contain all the bounding boxes.
         Input:
@@ -385,16 +345,7 @@ class DataAugmentForObjectDetection():
 
     # Mirror image
     def _filp_pic_bboxes(self, img, bboxes):
-        '''
-            参考:https://blog.csdn.net/jningwei/article/details/78753607
-            平移后的图片要包含所有的框
-            输入:
-                img:图像array
-                bboxes:该图像包含的所有boundingboxs,一个list,每个元素为[x_min, y_min, x_max, y_max],要确保是数值
-            输出:
-                flip_img:平移后的图像array
-                flip_bboxes:平移后的bounding box的坐标list
-        '''
+
         '''
         After translation, the image should contain all the bounding boxes.
         Input:
@@ -432,15 +383,7 @@ class DataAugmentForObjectDetection():
         return flip_img, flip_bboxes
 
     def dataAugment(self, img, bboxes):
-        '''
-        图像增强
-        输入:
-            img:图像array
-            bboxes:该图像的所有框坐标
-        输出:
-            img:增强后的图像
-            bboxes:增强后图片对应的box
-        '''
+
         '''
         Image Enhancement
         Input:
@@ -453,32 +396,24 @@ class DataAugmentForObjectDetection():
         print('------')
         while change_num < 1:   
             if random.random() < self.crop_rate:        # Crop
-                #print('裁剪')
+              
                 change_num += 1
                 img, bboxes = self._crop_img_bboxes(img, bboxes)
 
-            '''
-            if random.random() > self.rotation_rate:    # Rotation
-                #print('旋转')
-                change_num += 1
-                # angle = random.uniform(-self.max_rotation_angle, self.max_rotation_angle)
-                angle = random.sample([90, 180, 270],1)[0]
-                scale = random.uniform(0.7, 0.8)
-                img, bboxes = self._rotate_img_bbox(img, bboxes, angle, scale)
-            '''
+
 
             if random.random() < self.shift_rate:       # Translatio
-                #print('平移')
+               
                 change_num += 1
                 img, bboxes = self._shift_pic_bboxes(img, bboxes)
             
             if random.random() > self.change_light_rate: # Adjust Brightness
-                #print('亮度')
+              
                 change_num += 1
                 img = self._changeLight(img)
             
             if random.random() < self.add_noise_rate:    # Add noise
-                #print('加噪声')
+              
                 change_num += 1
                 img = self._addNoise(img)
 
@@ -487,10 +422,7 @@ class DataAugmentForObjectDetection():
                 change_num += 1
                 img = self._cutout(img, bboxes, length=self.cut_out_length, n_holes=self.cut_out_holes, threshold=self.cut_out_threshold)
 
-            # if random.random() < self.flip_rate:    # Inversion
-            #     print('翻转')
-            #     change_num += 1
-            #     img, bboxes = self._filp_pic_bboxes(img, bboxes)
+   
 
             #print('\n')
         # print('------')
@@ -544,4 +476,4 @@ if __name__ == '__main__':
 
 
     e=time.time()
-    print('耗时：',e-s)
+    print('time：',e-s)
